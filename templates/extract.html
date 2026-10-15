@@ -1,11 +1,181 @@
 {% extends 'base.html' %}
 
+{% block title %}Extract Contacts | ZootyGrow{% endblock %}
+
 {% block content %}
-<h1>EXTRACT</h1>
-<p>
-<form method="POST" class="post-form" enctype="multipart/form-data">  
-        {% csrf_token %}  
-        {{ form.as_p }}  
-        <button type="submit" class="save btn btn-default">EXTRACT</button>  
-</form>  
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      
+      <!-- Upload Card -->
+      <div class="card-custom upload-card">
+        <div class="text-center mb-4">
+          <div class="brand-icon-box mx-auto mb-3" style="width: 52px; height: 52px; font-size: 1.6rem;">
+            <i class="bi bi-box-arrow-in-down"></i>
+          </div>
+          <h2 class="fw-bold mb-1">Extract WhatsApp Contacts</h2>
+          <p class="text-secondary small">
+            Upload your saved WhatsApp Web HTML file to extract and clean group phone numbers.
+          </p>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data" id="extract-form">
+          {% csrf_token %}
+
+          <!-- Drag and Drop Upload Area -->
+          <div class="mb-4">
+            <label class="form-label fw-semibold text-dark mb-2">WhatsApp Web File</label>
+            <div class="drop-zone" id="drop-zone">
+              <i class="bi bi-cloud-arrow-up-fill drop-zone-icon"></i>
+              <div class="drop-zone-text">Choose file or drag & drop here</div>
+              <div class="drop-zone-subtext">Supported formats: <code>.html</code>, <code>.htm</code>, <code>.txt</code></div>
+              {{ form.documents }}
+            </div>
+
+            <!-- Selected File Feedback -->
+            <div id="file-info-badge" class="file-selected-box">
+              <i class="bi bi-file-earmark-check-fill text-success fs-4"></i>
+              <div class="flex-grow-1 overflow-hidden">
+                <div class="fw-bold text-dark text-truncate" id="selected-file-name">filename.html</div>
+                <div class="text-muted small" id="selected-file-size">0 KB</div>
+              </div>
+              <button type="button" class="btn btn-sm btn-link text-danger p-0" id="clear-file-btn" title="Remove file">
+                <i class="bi bi-x-circle fs-5"></i>
+              </button>
+            </div>
+
+            {% if form.documents.errors %}
+              <div class="text-danger small mt-2">
+                {{ form.documents.errors }}
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- Configuration Row -->
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <label class="form-label fw-semibold text-dark">{{ form.contact_prefix.label }}</label>
+              {{ form.contact_prefix }}
+              <div class="form-text small">{{ form.contact_prefix.help_text }}</div>
+              {% if form.contact_prefix.errors %}
+                <div class="text-danger small">{{ form.contact_prefix.errors }}</div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-semibold text-dark">{{ form.country_filter.label }}</label>
+              {{ form.country_filter }}
+              <div class="form-text small">Filter by country code or extract all numbers.</div>
+              {% if form.country_filter.errors %}
+                <div class="text-danger small">{{ form.country_filter.errors }}</div>
+              {% endif %}
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-wa-primary w-100 py-3 fs-5" id="submit-btn">
+            <i class="bi bi-lightning-fill"></i> Extract Contacts
+          </button>
+        </form>
+
+        <!-- Instructions Accordion / Card -->
+        <div class="mt-4 pt-3 border-top">
+          <div class="d-flex align-items-center justify-content-between cursor-pointer" data-bs-toggle="collapse" data-bs-target="#helpGuide" role="button" aria-expanded="false" aria-controls="helpGuide">
+            <span class="text-secondary small fw-semibold">
+              <i class="bi bi-info-circle-fill text-success me-1"></i> How to save the WhatsApp Web HTML file?
+            </span>
+            <i class="bi bi-chevron-down text-muted small"></i>
+          </div>
+
+          <div class="collapse mt-3" id="helpGuide">
+            <div class="p-3 bg-light rounded-3 small text-secondary">
+              <ol class="mb-0 ps-3">
+                <li class="mb-1">Open <strong>web.whatsapp.com</strong> in Chrome, Brave, Edge, or Firefox.</li>
+                <li class="mb-1">Click on the group chat whose contacts you want to export.</li>
+                <li class="mb-1">Click the <strong>Group Subject / Name</strong> at the top bar to open the Group Info drawer and reveal the participant list.</li>
+                <li class="mb-1">Press <kbd>Ctrl + S</kbd> (Windows/Linux) or <kbd>Cmd + S</kbd> (Mac) and choose <em>"Webpage, HTML Only"</em> or <em>"Webpage, Complete"</em>.</li>
+                <li>Upload the saved <code>.html</code> file above and click <strong>Extract Contacts</strong>.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('document-file-input');
+    const dropZone = document.getElementById('drop-zone');
+    const fileInfoBadge = document.getElementById('file-info-badge');
+    const fileNameDisplay = document.getElementById('selected-file-name');
+    const fileSizeDisplay = document.getElementById('selected-file-size');
+    const clearBtn = document.getElementById('clear-file-btn');
+    const form = document.getElementById('extract-form');
+    const submitBtn = document.getElementById('submit-btn');
+
+    if (!fileInput) return;
+
+    // Hide the raw input behind the styled drop zone
+    fileInput.style.position = 'absolute';
+    fileInput.style.inset = '0';
+    fileInput.style.opacity = '0';
+    fileInput.style.cursor = 'pointer';
+
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    function updateFileDisplay() {
+      if (fileInput.files && fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        fileNameDisplay.textContent = file.name;
+        fileSizeDisplay.textContent = formatBytes(file.size);
+        fileInfoBadge.style.display = 'flex';
+        dropZone.style.display = 'none';
+      } else {
+        fileInfoBadge.style.display = 'none';
+        dropZone.style.display = 'block';
+      }
+    }
+
+    fileInput.addEventListener('change', updateFileDisplay);
+
+    clearBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      fileInput.value = '';
+      updateFileDisplay();
+    });
+
+    // Drag-over styling
+    ['dragenter', 'dragover'].forEach(eventName => {
+      dropZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      dropZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+      });
+    });
+
+    // Spinner on submit
+    form.addEventListener('submit', function() {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Extracting contacts...';
+    });
+  });
+</script>
 {% endblock %}

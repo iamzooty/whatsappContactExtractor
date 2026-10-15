@@ -1,0 +1,25 @@
+# Virtual Environment
+bin/
+lib/
+lib64
+include/
+pyvenv.cfg
+.venv/
+venv/
+ENV/
+env/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django database & media
+db.sqlite3
+db.sqlite3-journal
+media/
+*.log
+
+# OS generated
+.DS_Store
+Thumbs.db

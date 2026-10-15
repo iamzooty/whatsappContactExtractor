@@ -26,5 +26,8 @@ urlpatterns = [
     path('extract/', views.extract_view, name='extract'),
     path('sender/', views.sender_view, name='sender'),
     path('success/', views.success_view, name='success'),
+    path('download/<int:doc_id>/', views.download_view, name='download'),
+]
 
-] #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

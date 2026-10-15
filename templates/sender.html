@@ -1,5 +1,106 @@
 {% extends 'base.html' %}
 
+{% block title %}WhatsApp Sender | ZootyGrow{% endblock %}
+
 {% block content %}
-<h1>SENDER</h1>
+<div class="container py-5">
+  <div class="text-center max-w-700 mx-auto mb-5">
+    <div class="badge-pill-soft mb-2">
+      <i class="bi bi-rocket-takeoff-fill text-success"></i> Next-Gen Feature Preview
+    </div>
+    <h1 class="fw-bold mt-2">WhatsApp Bulk Sender</h1>
+    <p class="text-secondary fs-5">
+      Send personalized messages and announcements directly to your extracted contact lists.
+    </p>
+  </div>
+
+  <div class="row g-4 justify-content-center">
+    <div class="col-lg-8">
+      
+      <!-- Sender Feature Card / Mockup -->
+      <div class="card-custom p-4 p-md-5 position-relative overflow-hidden mb-4">
+        <div class="d-flex align-items-center justify-content-between mb-4 pb-3 border-bottom">
+          <div class="d-flex align-items-center gap-3">
+            <div class="brand-icon-box" style="width: 44px; height: 44px;">
+              <i class="bi bi-chat-dots-fill"></i>
+            </div>
+            <div>
+              <h5 class="fw-bold mb-0">Campaign Messenger</h5>
+              <div class="text-muted small">Broadcast Studio</div>
+            </div>
+          </div>
+          <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle px-3 py-2">
+            <i class="bi bi-clock-history me-1"></i> Coming Soon
+          </span>
+        </div>
+
+        <!-- Mockup Form Controls -->
+        <div class="mb-3">
+          <label class="form-label fw-semibold text-dark">Target Contact Group</label>
+          <select class="form-select" disabled>
+            <option>Select an extracted CSV or upload contact list...</option>
+            <option>ZootyGrow_Contacts (181 recipients)</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label fw-semibold text-dark">Message Template</label>
+          <div class="bg-light p-3 rounded-3 border mb-2 font-monospace text-secondary small">
+            Hello {contact_name}, thank you for connecting with us! We have an update regarding our community...
+          </div>
+          <div class="form-text small">Supports dynamic tags like <code>{contact_name}</code>, <code>{phone}</code>, and personalized greetings.</div>
+        </div>
+
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="form-label fw-semibold text-dark">Sending Interval (Anti-Ban)</label>
+            <input type="text" class="form-control" value="Random delay (5s - 12s)" disabled>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label fw-semibold text-dark">Attachments</label>
+            <input type="text" class="form-control" value="Images, Flyers & PDF files" disabled>
+          </div>
+        </div>
+
+        <div class="text-center pt-2">
+          <button class="btn btn-secondary w-100 py-3 fw-semibold" disabled>
+            <i class="bi bi-lock-fill me-1"></i> Sender Feature Under Development
+          </button>
+        </div>
+      </div>
+
+      <!-- Feature Highlights -->
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="card-custom p-3 text-center">
+            <i class="bi bi-shield-check text-success fs-3 mb-2"></i>
+            <div class="fw-bold small">Smart Delays</div>
+            <div class="text-muted smaller">Protects your WhatsApp account with variable human delays.</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-custom p-3 text-center">
+            <i class="bi bi-tags-fill text-success fs-3 mb-2"></i>
+            <div class="fw-bold small">Personalized Tags</div>
+            <div class="text-muted smaller">Address each recipient by their group label or first name.</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card-custom p-3 text-center">
+            <i class="bi bi-paperclip text-success fs-3 mb-2"></i>
+            <div class="fw-bold small">Media Broadcast</div>
+            <div class="text-muted smaller">Attach promotional graphics, videos, or documents.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-5">
+        <a href="{% url 'extract' %}" class="btn btn-wa-primary">
+          <i class="bi bi-arrow-left-circle me-1"></i> Return to Contact Extractor
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
 {% endblock %}

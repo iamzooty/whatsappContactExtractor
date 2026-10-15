@@ -1,3 +1,433 @@
+/* ==========================================================================
+   ZootyGrow / WhatsApp Contact Extractor - Modern Design System
+   ========================================================================== */
+
+:root {
+  --wa-primary: #128C7E;
+  --wa-primary-hover: #0c6a5e;
+  --wa-accent: #25D366;
+  --wa-dark: #075E54;
+  --wa-night: #0b141a;
+  --wa-bg: #f8fafc;
+  --wa-surface: #ffffff;
+  --wa-surface-subtle: #f1f5f9;
+  --wa-border: #e2e8f0;
+  --wa-border-hover: #cbd5e1;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --gradient-wa: linear-gradient(135deg, #128C7E 0%, #25D366 100%);
+  --gradient-dark: linear-gradient(135deg, #075E54 0%, #128C7E 100%);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.07), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+  --shadow-glow: 0 10px 25px -5px rgba(37, 211, 102, 0.25);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+}
+
 body {
-	background: yellow;
+  background-color: var(--wa-bg);
+  color: var(--text-primary);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================================
+   Navigation
+   ========================================================================== */
+
+.navbar-custom {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--wa-border);
+  padding: 0.85rem 0;
+  transition: all 0.3s ease;
+}
+
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+.brand-icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--gradient-wa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.35rem;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+.brand-name-highlight {
+  background: var(--gradient-wa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-link-custom {
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: 0.5rem 1rem !important;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+}
+
+.nav-link-custom:hover {
+  color: var(--wa-primary);
+  background-color: rgba(18, 140, 126, 0.06);
+}
+
+.nav-link-custom.active {
+  color: var(--wa-dark);
+  font-weight: 600;
+  background-color: rgba(37, 211, 102, 0.12);
+}
+
+.btn-cta-nav {
+  background: var(--gradient-wa);
+  color: #ffffff !important;
+  font-weight: 600;
+  padding: 0.5rem 1.25rem !important;
+  border-radius: var(--radius-sm);
+  border: none;
+  box-shadow: 0 3px 10px rgba(18, 140, 126, 0.25);
+  transition: all 0.2s ease;
+}
+
+.btn-cta-nav:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-glow);
+}
+
+/* ==========================================================================
+   Buttons & Badges
+   ========================================================================== */
+
+.btn-wa-primary {
+  background: var(--gradient-wa);
+  color: #ffffff;
+  border: none;
+  font-weight: 600;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 14px rgba(18, 140, 126, 0.28);
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-wa-primary:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+}
+
+.btn-wa-outline {
+  background: #ffffff;
+  color: var(--wa-dark);
+  border: 1.5px solid var(--wa-border-hover);
+  font-weight: 600;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-wa-outline:hover {
+  background: var(--wa-surface-subtle);
+  border-color: var(--wa-primary);
+  color: var(--wa-primary);
+}
+
+.badge-pill-soft {
+  background-color: rgba(37, 211, 102, 0.12);
+  color: var(--wa-dark);
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid rgba(37, 211, 102, 0.2);
+}
+
+/* ==========================================================================
+   Card Styling
+   ========================================================================== */
+
+.card-custom {
+  background-color: var(--wa-surface);
+  border: 1px solid var(--wa-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
+}
+
+.card-custom-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ==========================================================================
+   Hero Section
+   ========================================================================== */
+
+.hero-section {
+  padding: 4.5rem 0 3.5rem;
+}
+
+.hero-title {
+  font-size: 2.85rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+}
+
+.hero-subtitle {
+  font-size: 1.18rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.hero-img-container {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 4px solid #ffffff;
+  background-color: #0b141a;
+}
+
+.hero-img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.hero-img-container:hover .hero-img {
+  transform: scale(1.03);
+}
+
+.hero-float-badge {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(11, 20, 26, 0.85);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* ==========================================================================
+   Feature & Step Cards
+   ========================================================================== */
+
+.step-card {
+  height: 100%;
+  padding: 2rem;
+  background: var(--wa-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--wa-border);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(37, 211, 102, 0.4);
+}
+
+.step-number {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(37, 211, 102, 0.15);
+  color: var(--wa-dark);
+  font-weight: 700;
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.step-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.step-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   Upload Area (Extract Page)
+   ========================================================================== */
+
+.upload-card {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2.5rem;
+  border-radius: var(--radius-xl);
+  background: #ffffff;
+  border: 1px solid var(--wa-border);
+  box-shadow: var(--shadow-lg);
+}
+
+.drop-zone {
+  border: 2px dashed #94a3b8;
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.drop-zone:hover, .drop-zone.dragover {
+  border-color: var(--wa-accent);
+  background: rgba(37, 211, 102, 0.05);
+}
+
+.drop-zone-icon {
+  font-size: 3rem;
+  color: var(--wa-primary);
+  margin-bottom: 0.75rem;
+}
+
+.drop-zone-text {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.35rem;
+}
+
+.drop-zone-subtext {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.file-selected-box {
+  display: none;
+  background: rgba(37, 211, 102, 0.1);
+  border: 1px solid rgba(37, 211, 102, 0.3);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.2rem;
+  margin-top: 1rem;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* ==========================================================================
+   Results Table & Success View
+   ========================================================================== */
+
+.success-hero {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.success-icon-badge {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--gradient-wa);
+  color: #fff;
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  box-shadow: var(--shadow-glow);
+}
+
+.stat-pill {
+  background: #f8fafc;
+  border: 1px solid var(--wa-border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.5rem;
+  text-align: center;
+}
+
+.stat-pill-num {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--wa-dark);
+  line-height: 1;
+}
+
+.stat-pill-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-top: 0.35rem;
+}
+
+.preview-table {
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+
+.preview-table th {
+  background-color: #f8fafc;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-top: none;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.preview-table td {
+  vertical-align: middle;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.footer-custom {
+  margin-top: auto;
+  border-top: 1px solid var(--wa-border);
+  padding: 1.75rem 0;
+  background: #ffffff;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
 }
