@@ -162,3 +162,8 @@ This project is licensed under the MIT License - feel free to use and adapt it f
 ## 👤 Author
 
 Developed by **[iamzooty](https://github.com/iamzooty)**.
+
+- **Upwork**: [freelancers/~0190f7e2501c7c5a85](https://www.upwork.com/freelancers/~0190f7e2501c7c5a85)
+- **LinkedIn**: [linkedin.com/in/iamzooty](https://www.linkedin.com/in/iamzooty/)
+- **Stack Overflow**: [@iamzooty](https://stackoverflow.com/users/iamzooty)
+
