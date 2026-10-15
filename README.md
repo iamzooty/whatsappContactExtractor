@@ -4,13 +4,13 @@ A fast, lightweight, and privacy-focused Django web application to extract, clea
 
 ---
 
-## 🎬 Video Demo
+## 🎬 Demo
 
 <p align="center">
-  <video src="assets/demo.webm" width="100%" controls="controls" autoplay loop muted></video>
+  <img src="assets/demo.gif" alt="WhatsApp Contact Extractor Demo" width="100%" />
 </p>
 
-> 🎥 **Watch Demo**: If the player does not load automatically in your browser, [click here to view the screencast](assets/demo.webm).
+> 🎥 **Original Video**: You can also download or inspect the [original screencast video here](assets/demo.webm).
 
 ---
 
